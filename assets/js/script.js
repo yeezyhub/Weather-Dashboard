@@ -2,37 +2,47 @@ let APIKey = '887a16c992b277c741996e2c64385349';
 let textBox = document.querySelector('#textBox');
 let searchButton = document.querySelector('#search-button');
 let cityList = document.querySelector('#city-list');
-let lat, lon;
 
 
-function getApi() {
+function locationApi() {
     // var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + textBox + "&appid=" + APIKey;
 
 
     // Forward Geocoding API Endpoint
     // var latLonAPI = 'https://api.openweathermap.org/data/2.5/weather?q=$' + textBox.value + '&appid=$' + APIKey;
-    var latLonAPI = `https://api.openweathermap.org/data/2.5/weather?q=${textBox.value}&units=imperial&appid=${APIKey}`;
+    var latLonURL = `https://api.openweathermap.org/data/2.5/weather?q=${textBox.value}&units=imperial&appid=${APIKey}`;
 
 
-    fetch(latLonAPI)
+    fetch(latLonURL)
     .then(function (response) {
+        let lat = response.coord.lat;
+        let lon = response.coord.lon;
+        weatherApi(lat, lon);
         return response.json();
+
     })
     .then(function (data) {
         console.log(data);
     })
 
-    // var queryURL = 'api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + APIKey;
+    // //if city they enter is not found
+    // .catch(err => alert('404 Not Found'));
 
-    // fetch(queryURL)
-    //     .then(function (response) {
-    //         return response.json();
-    //     })
-    //     .then(function (data) {
-    //         console.log(data);
-    //     })
 }
-// fetch(queryURL)
+
+function weatherApi(lat, lon) {
+
+    var weatherURL = `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+
+    fetch(weatherURL)
+    .then(function (response) {
+    return response.json();
+    })
+    .then(function (data) {
+    console.log(data);
+    })
+
+}
 
 let cityListLocal = [];
 let citiesLocal;
@@ -65,4 +75,4 @@ function listCities() {
 
 
 searchButton.addEventListener('click', search);
-searchButton.addEventListener('click', getApi);
+searchButton.addEventListener('click', locationApi);
