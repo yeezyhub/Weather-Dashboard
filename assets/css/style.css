@@ -1,0 +1,14 @@
+#search-container{
+    display: inline-grid;
+    border-bottom: solid 2px lightgrey;
+}
+
+#search-button{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.hide{
+    display: none;
+}
+
