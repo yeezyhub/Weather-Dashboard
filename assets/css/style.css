@@ -1,3 +1,7 @@
+body{
+    display: flex;
+}
+
 #search-container{
     display: inline-grid;
     border-bottom: solid 2px lightgrey;

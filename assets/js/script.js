@@ -1,7 +1,15 @@
-let APIKey = '887a16c992b277c741996e2c64385349';
-let textBox = document.querySelector('#textBox');
-let searchButton = document.querySelector('#search-button');
-let cityList = document.querySelector('#city-list');
+const APIKey = '887a16c992b277c741996e2c64385349';
+const textBox = document.querySelector('#textBox');
+const searchButton = document.querySelector('#search-button');
+const cityList = document.querySelector('#city-list');
+const cityInfo = document.querySelector('#city-info');
+const cityNameEl = document.querySelector('#city-name');
+const dateEl = document.querySelector('#date');
+const iconEl = document.querySelector('.icon');
+const tempEl = document.querySelector('.temp');
+const windEl = document.querySelector('.wind');
+const humidityEl = document.querySelector('.humidity');
+
 
 
 function locationApi() {
@@ -12,16 +20,21 @@ function locationApi() {
     // var latLonAPI = 'https://api.openweathermap.org/data/2.5/weather?q=$' + textBox.value + '&appid=$' + APIKey;
     var latLonURL = `https://api.openweathermap.org/data/2.5/weather?q=${textBox.value}&units=imperial&appid=${APIKey}`;
 
-
     fetch(latLonURL)
-    .then(function (response) {
-        let lat = response.coord.lat;
-        let lon = response.coord.lon;
-        weatherApi(lat, lon);
+    .then(function (response) { //turns into JavaScript object
         return response.json();
-
     })
     .then(function (data) {
+        let lat = data.coord.lat;
+        let lon = data.coord.lon;
+        let cityName = data.name;
+        let date = data.dt;
+        let weatherCondition = data.weather[0].icon;
+        let temp = data.main.temp;
+        let wind = data.wind.speed;
+        let humidity = data.main.humidity;
+        
+        weatherApi(lat, lon, cityName, date, weatherCondition, temp, wind, humidity);
         console.log(data);
     })
 
@@ -30,9 +43,9 @@ function locationApi() {
 
 }
 
-function weatherApi(lat, lon) {
+function weatherApi(lat, lon, cityName, date, weatherCondition, temp, wind, humidity) {
 
-    var weatherURL = `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+    var weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`;
 
     fetch(weatherURL)
     .then(function (response) {
@@ -40,6 +53,15 @@ function weatherApi(lat, lon) {
     })
     .then(function (data) {
     console.log(data);
+    cityNameEl.textContent = cityName;
+    date = (new Date(date*1000)).toLocaleDateString('en-US');
+    dateEl.textContent = date;
+    tempEl.textContent = 'Temp: ' + temp + ' \u00B0F';
+    windEl.textContent = 'Wind: ' + wind + ' MPH';
+    humidityEl.textContent = 'Humidity: ' + humidity + ' %';
+    iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${weatherCondition}@2x.png`);
+    // iconEl.classList.remove('hide');
+
     })
 
 }

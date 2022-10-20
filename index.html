@@ -9,14 +9,26 @@
 </head>
 <body>
 
-  <article id="search-container">
-    <header>Weather Dashboard</header>
-    <h2>Search for a City:</h2>
-    <input type="text" id="textBox" name="textBox" placeholder="ex. Austin">
-    <button id="search-button">Search</button>
-  </article>
+  <section id="left-side">
+    <article id="search-container">
+      <header>Weather Dashboard</header>
+      <h2>Search for a City:</h2>
+      <input type="text" id="textBox" name="textBox" placeholder="ex. Austin">
+      <button id="search-button">Search</button>
+    </article>
 
-  <article id="city-list"></article>
+    <article id="city-list"></article>
+  </section>
+
+  <article id="city-info">
+    <h2 id="city-name"></h2>
+    <h2 id="date"></h2>
+    <img class="icon" src="" alt="weather-icon">
+    <ul class="temp"></ul>
+    <ul class="wind"></ul>
+    <ul class="humidity"></ul>
+  </article>
+  
   
   <script src="./assets/js/script.js"></script>
 </body>
