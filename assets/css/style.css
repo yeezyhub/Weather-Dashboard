@@ -5,6 +5,7 @@ body{
 #search-container{
     display: inline-grid;
     border-bottom: solid 2px lightgrey;
+    margin-bottom: 15px;
 }
 
 #search-button{
