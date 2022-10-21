@@ -10,7 +10,10 @@ const tempEl = document.querySelector('.temp');
 const windEl = document.querySelector('.wind');
 const humidityEl = document.querySelector('.humidity');
 
-
+function kelvinToFahrenheit(kelvin) {
+   let fahrenheit = 1.8 * (kelvin-273) + 32;
+   return fahrenheit;
+}
 
 function locationApi() {
     // var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + textBox + "&appid=" + APIKey;
@@ -60,7 +63,46 @@ function weatherApi(lat, lon, cityName, date, weatherCondition, temp, wind, humi
     windEl.textContent = 'Wind: ' + wind + ' MPH';
     humidityEl.textContent = 'Humidity: ' + humidity + ' %';
     iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${weatherCondition}@2x.png`);
-    // iconEl.classList.remove('hide');
+    iconEl.classList.remove('hide');
+
+    let firstDay = data.list[0];
+    let secondDay = data.list[8];
+    let thirdDay = data.list[16];
+    let fourthDay = data.list[24];
+    let fifthDay = data.list[32];
+
+    let firstDayTemp = kelvinToFahrenheit(firstDay.main.temp);
+    let secondDayTemp = kelvinToFahrenheit(secondDay.main.temp);
+    let thirdDayTemp = kelvinToFahrenheit(thirdDay.main.temp);
+    let fourthDayTemp = kelvinToFahrenheit(fourthDay.main.temp);
+    let fifthDayTemp = kelvinToFahrenheit(fifthDay.main.temp);
+
+    let firstDayWind = firstDay.wind.speed;
+    let secondDayWind = secondDay.wind.speed;
+    let thirdDayWind = thirdDay.wind.speed;
+    let fourthDayWind = fourthDay.wind.speed;
+    let fifthDayWind = fifthDay.wind.speed;
+
+    let firstDayHum = firstDay.main.humidity;
+    let secondDayHum = secondDay.main.humidity;
+    let thirdDayHum = thirdDay.main.humidity;
+    let fourthDayHum = fourthDay.main.humidity;
+    let fifthDayHum = fifthDay.main.humidity;
+
+    
+
+
+    console.log(firstDayHum);
+
+    // for (let i = 0; i < array.length; i++) {
+        
+        
+    // }
+
+
+
+
+    console.log(kelvinToFahrenheit(firstDay.main.temp));
 
     })
 

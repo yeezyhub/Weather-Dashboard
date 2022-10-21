@@ -16,3 +16,7 @@ body{
     display: none;
 }
 
+#city-info{
+    border: solid 2px;
+    padding: 10px;
+}
