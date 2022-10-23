@@ -47,6 +47,10 @@ body{
     margin: 15px;
 }
 
+#right-side{
+    width: 74%;
+}
+
 #header{
     width: 100%;
     text-align: center;
@@ -66,5 +70,9 @@ body{
 
 #forecast{
     margin: 15px;
+    display: flex;
+
+}
+#card-header{
     display: flex;
 }

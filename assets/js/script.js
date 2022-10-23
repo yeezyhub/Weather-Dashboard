@@ -11,6 +11,7 @@ const windEl = document.querySelector('.wind');
 const humidityEl = document.querySelector('.humidity');
 const forecastEl = document.querySelector('#forecast');
 const buttonEl = document.querySelector('.button');
+
 let cityChosen = textBox.value;
 
 let cityListLocal = [];
@@ -19,12 +20,14 @@ let cityNames;
 let eachCity;
 let cityButton;
 let cityButtonEl;
+let forecastCard;
+
+let isCitySelected = false;
 
 function init() {
     textBox.value = 'Austin';
     cityList.textContent = '';
     locationApi();
-    // search();
 }
 
 
@@ -36,11 +39,7 @@ function kelvinToFahrenheit(kelvin) {
 }
 
 function locationApi() {
-    // var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + textBox + "&appid=" + APIKey;
 
-
-    // Forward Geocoding API Endpoint
-    // var latLonAPI = 'https://api.openweathermap.org/data/2.5/weather?q=$' + textBox.value + '&appid=$' + APIKey;
     var latLonURL = `https://api.openweathermap.org/data/2.5/weather?q=${textBox.value}&units=imperial&appid=${APIKey}`;
 
     fetch(latLonURL)
@@ -85,75 +84,45 @@ function weatherApi(lat, lon, cityName, date, weatherCondition, temp, wind, humi
     iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${weatherCondition}@2x.png`);
     iconEl.classList.remove('hide');
     cityInfo.classList.remove('hide');
+    
+    if (isCitySelected) {
+    }
 
-for (let i = 0; i < data.list.length; i++) {
-    let condition = data.list[i].dt_txt.includes("12:00:00");
-        if (condition) {
-            forecastEl.classList.remove('hide');
-            console.log(data.list[i]);
-            let forecastContainer = document.createElement('div');
-            forecastContainer.classList.add("card")
-            let forecastCard = `
-            <div class="card-body">
-              <h5 class="card-title">(${data.list[i].dt_txt})</h5>
-              <img src='http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png' class="card-subtitle mb-2 text-muted"></img>
-              <p class="card-text">Temp: ${kelvinToFahrenheit(data.list[i].main.temp)} \u00B0F</p>
-              <p class="card-text">Wind: ${data.list[i].wind.speed} MPH</p>
-              <p class="card-text">Humidity: ${data.list[i].main.humidity} %</p>
-            </div>
-            `;
-            forecastContainer.innerHTML = forecastCard;
-            forecastEl.appendChild(forecastContainer);
-        }
-}
-    // let firstDay = data.list[1];
-    // let secondDay = data.list[9];
-    // let thirdDay = data.list[17];
-    // let fourthDay = data.list[25];
-    // let fifthDay = data.list[33];
+    for (let i = 0; i < data.list.length; i++) {
 
-    // console.log(firstDay);
-    // console.log(secondDay);
-    // console.log(thirdDay);
-    // console.log(fourthDay);
-    // console.log(fifthDay);
+        let condition = data.list[i].dt_txt.includes("12:00:00");
+            if (condition) {
+                forecastEl.classList.remove('hide');
+                let forecastContainer = document.createElement('div');
+                forecastContainer.classList.add("card");
+                let dateSplit = data.list[i].dt_txt.split('');
+                let dateFormat = dateSplit[5] + dateSplit[6] + '/' + dateSplit[8] + dateSplit[9] + '/' + dateSplit[0] + dateSplit[1] + dateSplit[2] + dateSplit[3];
+                forecastCard = `
+                <div class="card-body">
+                <h6 class="card-title">(${dateFormat})</h6>
+                <img src='http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png' class="card-subtitle mb-2 text-muted"></img>
+                <p class="card-text">Temp: ${kelvinToFahrenheit(data.list[i].main.temp)} \u00B0F</p>
+                <p class="card-text">Wind: ${data.list[i].wind.speed} MPH</p>
+                <p class="card-text">Humidity: ${data.list[i].main.humidity} %</p>
+                </div>
+                `;
+                forecastContainer.innerHTML = forecastCard;
+                forecastEl.appendChild(forecastContainer);
+            }
+            
+    }   
 
-    // let firstDayIcon = firstDay.weather[0].icon;
-    // let secondDayIcon =  secondDay.weather[0].icon;
-    // let thirdDayIcon = thirdDay.weather[0].icon;
-    // let fourthDayIcon = fourthDay.weather[0].icon;
-    // let fifthDayIcon = fifthDay.weather[0].icon;
-
-
-    // let firstDayTemp = kelvinToFahrenheit(firstDay.main.temp);
-    // let secondDayTemp = kelvinToFahrenheit(secondDay.main.temp);
-    // let thirdDayTemp = kelvinToFahrenheit(thirdDay.main.temp);
-    // let fourthDayTemp = kelvinToFahrenheit(fourthDay.main.temp);
-    // let fifthDayTemp = kelvinToFahrenheit(fifthDay.main.temp);
-
-    // let firstDayWind = firstDay.wind.speed;
-    // let secondDayWind = secondDay.wind.speed;
-    // let thirdDayWind = thirdDay.wind.speed;
-    // let fourthDayWind = fourthDay.wind.speed;
-    // let fifthDayWind = fifthDay.wind.speed;
-
-    // let firstDayHum = firstDay.main.humidity;
-    // let secondDayHum = secondDay.main.humidity;
-    // let thirdDayHum = thirdDay.main.humidity;
-    // let fourthDayHum = fourthDay.main.humidity;
-    // let fifthDayHum = fifthDay.main.humidity;
-    })
+    
+    }
+    )
+    
 
 }
-
-
-
 
 function search() {
     citiesLocal = localStorage.setItem(textBox.value, '');
     cityList.textContent = '';
     listCities();
-    // textBox.value = ''; //resets the text in textbox
 }
 
 
@@ -168,22 +137,19 @@ function listCities() {
         cityButtonEl = cityList.appendChild(cityButton);
         cityButtonEl.textContent = cityListLocal[i];        
    }   
-//    buttonEl.onclick = function () { getButtonValue(this); };
 
 }
 
 init();
-
 listCities();
 
-
 function getButtonValue(value) {
+    isCitySelected = true;
     var buttonValue = value.innerHTML;
+    textBox.value = buttonValue;
     console.log(buttonValue);
-    locationApi(buttonValue);
+    locationApi();
 }
-
-
 
 
 searchButton.addEventListener('click', search);
