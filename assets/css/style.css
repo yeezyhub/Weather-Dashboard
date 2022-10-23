@@ -21,8 +21,14 @@ body{
 #search-button{
     margin-top: 15px;
     margin-bottom: 15px;
-    background-image: linear-gradient(to right, rgb(0, 132, 255) , rgb(141, 51, 243));
+    background-image: linear-gradient(to right, rgb(0, 132, 255) , rgb(167, 92, 252));
+    color: black;
+}
+
+#search-button:hover {
+    background-image: linear-gradient(to top, rgb(0, 132, 255) , rgb(167, 92, 252));
     color: white;
+    transition: 0.3s;
 }
 
 /* Buttons Styling */
@@ -30,6 +36,12 @@ body{
     margin-bottom: 15px;
     background-color: lightgrey;
     border-radius: 5px;
+}
+
+.button:hover {
+    background-color: rgb(141, 51, 243);
+    color: white;
+    transition: 0.3s;
 }
 
 /* 'hide' action */

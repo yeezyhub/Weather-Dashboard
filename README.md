@@ -11,7 +11,7 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The default location is set to Austin, TX. The user may type in to see other cities' current or projected five days weather conditions data. The search history is located underneath the search bar for easy access to the previously searched locations.
 
-<img src="./assets/images/.gif">
+<img src="./assets/images/weather-dashboard.gif">
 
 ## Credits
 

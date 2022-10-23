@@ -23,8 +23,8 @@ let cityButton;
 let cityButtonEl;
 let forecastCard;
 
-//to check if city is selected from the list, helps clearing the previous forecast data off the screen
-let isCitySelected = false;
+//to check if city is selected from the list, helps clearing the previous forecast data off the screen, first city is selected by default
+let isCitySelected = true;
 
 //first data is printed with this method
 function init() {
