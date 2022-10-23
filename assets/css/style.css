@@ -1,19 +1,23 @@
+/* Universal Selector */
 *{
     margin: 0;
     padding: 0;
 }
 
+/* Body */
 body{
     display: flex;
     flex-wrap: wrap;
 }
 
+/* Search Container */
 #search-container{
     display: inline-grid;
     border-bottom: solid 2px lightgrey;
     margin-bottom: 15px;
 }
 
+/* Search Button */
 #search-button{
     margin-top: 15px;
     margin-bottom: 15px;
@@ -21,36 +25,43 @@ body{
     color: white;
 }
 
+/* Buttons Styling */
 .button{
     margin-bottom: 15px;
     background-color: lightgrey;
     border-radius: 5px;
 }
 
+/* 'hide' action */
 .hide{
     display: none;
 }
 
+/* City Info */
 #city-info{
     border: solid 2px;
     padding: 10px;
     margin: 15px;
 }
 
+/* City List */
 #city-list{
     width: min-content;
     display: grid;
     width: 100%;
 }
 
+/* Left Side of the Website */
 #left-side{
     margin: 15px;
 }
 
+/* Right Side of the Website */
 #right-side{
     width: 74%;
 }
 
+/* Header */
 #header{
     width: 100%;
     text-align: center;
@@ -63,17 +74,21 @@ body{
     font-weight: bolder;
 }
 
+/* Card Body */
 .card-body{
     background-color: rgb(150, 60, 229);
     color: white;
     font-size: 18px;
 }
 
+/* Forecast Container */
 #forecast{
     margin: 15px;
     display: flex;
 
 }
+
+/* Card Header */
 #card-header{
     display: flex;
 }
