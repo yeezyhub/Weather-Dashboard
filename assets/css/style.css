@@ -66,6 +66,7 @@ body{
 .card-body{
     background-color: rgb(150, 60, 229);
     color: white;
+    font-size: 18px;
 }
 
 #forecast{

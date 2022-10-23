@@ -86,6 +86,10 @@ function weatherApi(lat, lon, cityName, date, weatherCondition, temp, wind, humi
     cityInfo.classList.remove('hide');
     
     if (isCitySelected) {
+        forecastEl.replaceChildren();
+        let forecastText = document.createElement('h4');
+        forecastEl.appendChild(forecastText);
+        forecastText.textContent = '5-Day Forecast: '
     }
 
     for (let i = 0; i < data.list.length; i++) {
@@ -100,7 +104,7 @@ function weatherApi(lat, lon, cityName, date, weatherCondition, temp, wind, humi
                 forecastCard = `
                 <div class="card-body">
                 <h6 class="card-title">(${dateFormat})</h6>
-                <img src='http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png' class="card-subtitle mb-2 text-muted"></img>
+                <img src='http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png' class=""></img>
                 <p class="card-text">Temp: ${kelvinToFahrenheit(data.list[i].main.temp)} \u00B0F</p>
                 <p class="card-text">Wind: ${data.list[i].wind.speed} MPH</p>
                 <p class="card-text">Humidity: ${data.list[i].main.humidity} %</p>
