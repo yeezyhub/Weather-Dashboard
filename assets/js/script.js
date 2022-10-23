@@ -10,6 +10,24 @@ const tempEl = document.querySelector('.temp');
 const windEl = document.querySelector('.wind');
 const humidityEl = document.querySelector('.humidity');
 const forecastEl = document.querySelector('#forecast');
+const buttonEl = document.querySelector('.button');
+let cityChosen = textBox.value;
+
+let cityListLocal = [];
+let citiesLocal;
+let cityNames;
+let eachCity;
+let cityButton;
+let cityButtonEl;
+
+function init() {
+    textBox.value = 'Austin';
+    cityList.textContent = '';
+    locationApi();
+    // search();
+}
+
+
 
 function kelvinToFahrenheit(kelvin) {
    let fahrenheit = 1.8 * (kelvin-273) + 32;
@@ -60,7 +78,7 @@ function weatherApi(lat, lon, cityName, date, weatherCondition, temp, wind, humi
     console.log(data);
     cityNameEl.textContent = cityName;
     date = (new Date(date*1000)).toLocaleDateString('en-US');
-    dateEl.textContent = date;
+    dateEl.textContent = '(' + date + ')';
     tempEl.textContent = 'Temp: ' + temp + ' \u00B0F';
     windEl.textContent = 'Wind: ' + wind + ' MPH';
     humidityEl.textContent = 'Humidity: ' + humidity + ' %';
@@ -69,14 +87,15 @@ function weatherApi(lat, lon, cityName, date, weatherCondition, temp, wind, humi
     cityInfo.classList.remove('hide');
 
 for (let i = 0; i < data.list.length; i++) {
-    let condition = data.list[i].dt_txt.includes("09:00:00");
+    let condition = data.list[i].dt_txt.includes("12:00:00");
         if (condition) {
+            forecastEl.classList.remove('hide');
             console.log(data.list[i]);
             let forecastContainer = document.createElement('div');
             forecastContainer.classList.add("card")
             let forecastCard = `
             <div class="card-body">
-              <h5 class="card-title">${data.list[i].dt_txt}</h5>
+              <h5 class="card-title">(${data.list[i].dt_txt})</h5>
               <img src='http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png' class="card-subtitle mb-2 text-muted"></img>
               <p class="card-text">Temp: ${kelvinToFahrenheit(data.list[i].main.temp)} \u00B0F</p>
               <p class="card-text">Wind: ${data.list[i].wind.speed} MPH</p>
@@ -123,19 +142,10 @@ for (let i = 0; i < data.list.length; i++) {
     // let thirdDayHum = thirdDay.main.humidity;
     // let fourthDayHum = fourthDay.main.humidity;
     // let fifthDayHum = fifthDay.main.humidity;
-
-
-
     })
 
 }
 
-let cityListLocal = [];
-let citiesLocal;
-let cityNames;
-let eachCity;
-let cityButton;
-let cityButtonEl;
 
 
 
@@ -144,22 +154,36 @@ function search() {
     cityList.textContent = '';
     listCities();
     // textBox.value = ''; //resets the text in textbox
-
 }
+
 
 function listCities() {
     cityNames = Object.keys(localStorage);
+    
     for (let i = 0; i < localStorage.length; i++) {
         cityListLocal[i] = cityNames[i];
         cityButton = document.createElement('button');
+        cityButtonEl = cityButton.classList.add('button');
+        cityButton.onclick = function(){getButtonValue(this)};
         cityButtonEl = cityList.appendChild(cityButton);
-        // cityList.children.classList.add('addedButton');
-        // cityButtonEl.style.cssText = 'box-sizing: border-box';
-        cityButtonEl.textContent = cityListLocal[i];
-   }
+        cityButtonEl.textContent = cityListLocal[i];        
+   }   
+//    buttonEl.onclick = function () { getButtonValue(this); };
+
 }
 
+init();
+
 listCities();
+
+
+function getButtonValue(value) {
+    var buttonValue = value.innerHTML;
+    console.log(buttonValue);
+    locationApi(buttonValue);
+}
+
+
 
 
 searchButton.addEventListener('click', search);

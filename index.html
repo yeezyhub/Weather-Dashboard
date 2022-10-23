@@ -10,28 +10,31 @@
 </head>
 <body>
 
+  <header id="header">Weather Dashboard</header>
   <section id="left-side">
     <article id="search-container">
-      <header>Weather Dashboard</header>
-      <h2>Search for a City:</h2>
+      <h3>Search for a City:</h3>
       <input type="text" id="textBox" name="textBox" placeholder="ex. Austin">
       <button id="search-button">Search</button>
     </article>
 
-    <article id="city-list"></article>
+      <section id="city-list"></section>
   </section>
 
-  <article id="city-info" class="hide">
-    <h2 id="city-name"></h2>
-    <h2 id="date"></h2>
-    <img class="icon hide" src="" alt="weather-icon">
-    <ul class="temp"></ul>
-    <ul class="wind"></ul>
-    <ul class="humidity"></ul>
-  </article>
+  <div id="right-side">
+    <article id="city-info" class="hide">
+      <h2 id="city-name"></h2>
+      <h2 id="date"></h2>
+      <img class="icon hide" src="" alt="weather-icon">
+      <ul class="temp"></ul>
+      <ul class="wind"></ul>
+      <ul class="humidity"></ul>
+    </article>
 
-  <article id="forecast"></article>
-
+    <article class="hide" id="forecast">
+      <h4>5-Day Forecast:</h4>
+    </article>
+  </div>
 
   
   

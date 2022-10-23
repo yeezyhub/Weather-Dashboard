@@ -1,5 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body{
     display: flex;
+    flex-wrap: wrap;
 }
 
 #search-container{
@@ -11,6 +17,14 @@ body{
 #search-button{
     margin-top: 15px;
     margin-bottom: 15px;
+    background-image: linear-gradient(to right, rgb(0, 132, 255) , rgb(141, 51, 243));
+    color: white;
+}
+
+.button{
+    margin-bottom: 15px;
+    background-color: lightgrey;
+    border-radius: 5px;
 }
 
 .hide{
@@ -20,4 +34,37 @@ body{
 #city-info{
     border: solid 2px;
     padding: 10px;
+    margin: 15px;
+}
+
+#city-list{
+    width: min-content;
+    display: grid;
+    width: 100%;
+}
+
+#left-side{
+    margin: 15px;
+}
+
+#header{
+    width: 100%;
+    text-align: center;
+    margin: 5px;
+    padding: 10px;
+    background-image: linear-gradient(to right, rgb(0, 132, 255) , rgb(246, 0, 246));
+    color: white;
+    border-radius: 5px;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.card-body{
+    background-color: rgb(150, 60, 229);
+    color: white;
+}
+
+#forecast{
+    margin: 15px;
+    display: flex;
 }
